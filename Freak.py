@@ -20,7 +20,8 @@ class FreakChecker:
     def run(self, ip, port):
         try:
             if 'win32' in self.platform:
-                self.judge = subprocess.Popen([os.path.dirname(os.path.abspath("__file__"))+"\\OpenSSL\\"+'openssl.exe', 's_client', '-connect', ip+':'+str(port),'-cipher','EXPORT'], stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+                opensslPath = os.path.dirname(os.path.abspath("__file__"))+"\\openssl\\bin"+'openssl.exe'
+                self.judge = subprocess.Popen([opensslPath, 's_client', '-connect', ip+':'+str(port),'-cipher','EXPORT'], stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
             else:    
                 self.judge = subprocess.Popen(['openssl', 's_client', '-connect', ip+':'+str(port),'-cipher','EXPORT'], stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
             self.judge = self.judge.communicate()[0]
